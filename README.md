@@ -51,3 +51,6 @@ For older distributions like Ubuntu 21.04, Debian Stable and older.
 ```
 sudo apt install nala-legacy
 ```
+Now run:
+```
+bash <(curl -s https://raw.githubusercontent.com/Luismm2311/vCareSystem/master/install.sh)
