@@ -53,4 +53,4 @@ sudo apt install nala-legacy -y
 ```
 Now run:
 ```
-sudo bash <(curl -s https://raw.githubusercontent.com/Luismm2311/vCareSystem/master/install.sh)
+curl -s https://raw.githubusercontent.com/Luismm2311/vCareSystem/master/install.sh)|sudo bash
