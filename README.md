@@ -45,11 +45,11 @@ sudo apt update
 ```
 For Ubuntu 22.04, Debian Sid and newer.
 ```bash
-sudo apt install nala
+sudo apt install nala -y
 ```
 For older distributions like Ubuntu 21.04, Debian Stable and older.
 ```
-sudo apt install nala-legacy
+sudo apt install nala-legacy -y
 ```
 Now run:
 ```
