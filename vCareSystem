@@ -1,6 +1,9 @@
 #!/bin/bash
 clear
 set -e
+RED='\e[0;31m'
+GREEN='\e[0;32m'
+NC='\e[0m'
 #
 #
 #_______________________________________________
@@ -29,9 +32,9 @@ UCARE_VERSION=(20.03.0)
 # Checking if the user has run the script with "sudo" or not
 if [[ $EUID -ne 0 ]] ; then
     clear
-    echo ""
-    echo "vCoreSystem must be run as root or with sudo. Now I will just exit..." 1>&2
-    echo ""
+    echo
+    echo -e "${RED}vCoreSystem must be run as root or with sudo. Now I will just exit..." ${NC}
+    echo
     sleep 2
     exit 1
 fi
@@ -39,7 +42,7 @@ REQUIRED_PKG="nala"
 PKG_OK=$(dpkg-query -W --showformat='${Status}\n' $REQUIRED_PKG|grep "install ok installed")
 echo Checking for $REQUIRED_PKG: $PKG_OK
 if [ "" = "$PKG_OK" ]; then
-  echo "Please install nala:"
+  echo -e "${RED}Please install nala:" ${NC}
   echo "https://gitlab.com/volian/nala#installation"
   sleep 5
   exit 1
@@ -52,51 +55,51 @@ if [ "" = "$PKG_OK" ]; then
   sudo nala install $REQUIRED_PKG -y
 fi
 function WELCOME_SCREEN {
-	echo "_______________________________________________________"
-	echo "                                                       "
-	echo "                  vCoreSystem                          "
-	echo "            ~~~~~~~~~~~~~~~~~~~~~                      "
-	echo "                                                       "
-	echo " Welcome to all-in-one System Update and maintenance   "
-	echo " assistant script.                                     "
-	echo "                                                       "
-	echo "                                                       "
-	echo " This simple script will automatically         	     "
-	echo " Checks for the fastest mirros,refresh                 "
-	echo " your packagelist, download and                        "
-	echo " install updates (if there are any), remove any old    "
-	echo " kernels, obsolete packages and configuration files    "
-	echo " to free up disk space, without any need of user       "
-	echo " interference                                          "
-	echo "_______________________________________________________"
+	echo -e "${GREEN}_______________________________________________________"
+	echo -e "${GREEN}                                                       "
+	echo -e "${GREEN}                  vCoreSystem                          "
+	echo -e "${GREEN}            ~~~~~~~~~~~~~~~~~~~~~                      "
+	echo -e "${GREEN}                                                       "
+	echo -e "${GREEN} Welcome to all-in-one System Update and maintenance   "
+	echo -e "${GREEN} assistant script.                                     "
+	echo -e "${GREEN}                                                       "
+	echo -e "${GREEN}                                                       "
+	echo -e "${GREEN} This simple script will automatically         	     "
+	echo -e "${GREEN} Checks for the fastest mirros,refresh                 "
+	echo -e "${GREEN} your packagelist, download and                        "
+	echo -e "${GREEN} install updates (if there are any), remove any old    "
+	echo -e "${GREEN} kernels, obsolete packages and configuration files    "
+	echo -e "${GREEN} to free up disk space, without any need of user       "
+	echo -e "${GREEN} interference                                          "
+	echo -e "${GREEN}_______________________________________________________"
 	echo
-	echo " vCoreSystem will start in 5 seconds... "
+	echo -e "${GREEN} vCoreSystem will start in 5 seconds... "${NC}
 	sleep 5
 }
 
 function MAINTENACE {
 	echo
 	echo
-	echo "#########################"
-	echo "          Starting"
-	echo "#########################"
+	echo -e "${GREEN}#########################"
+	echo -e "${GREEN}          Starting"
+	echo -e "${GREEN}#########################" ${NC}
 	echo
 	echo
 	sudo nala fetch --auto -y
 	echo 
 	echo
-	echo "##########################"
-	echo " Found the best mirrors"
-	echo "##########################"
+	echo -e "${GREEN}##########################"
+	echo -e "${GREEN} Found the best mirrors"
+	echo -e "${GREEN}##########################"${NC}
 	echo
 	echo
 	## Updates packages and libraries
 	sudo nala upgrade --purge -y;
 	echo
-	echo "###############################################"
-	echo "Finished updating packages, system libraries,"
-	echo "       andremoving unneeded packages "
-	echo "###############################################"
+	echo -e "${GREEN}###############################################"
+	echo -e "${GREEN}Finished updating packages, system libraries,"
+	echo -e "${GREEN}       andremoving unneeded packages "
+	echo -e "${GREEN}###############################################"${NC}
 	sleep 1
 	echo
 
@@ -144,17 +147,17 @@ function MAINTENACE {
 	sudo apt $APT_OPTS remove $PURGE;
 
 	echo
-	echo "###################################"
-	echo "Finished removing old kernels"
-	echo "###################################"
+	echo -e "${GREEN}###################################"
+	echo -e "${GREEN}Finished removing old kernels"
+	echo -e "${GREEN}###################################"${NC}
 	sleep 1
 	echo
 	## Removes unused config files
 	sudo deborphan -n --find-config | xargs sudo apt-get -y --purge autoremove;
 	echo
-	echo "#####################################"
-	echo "Finished removing unused config files"
-	echo "#####################################"
+	echo -e "${GREEN}#####################################"
+	echo -e "${GREEN}Finished removing unused config files"
+	echo -e "${GREEN}#####################################"${NC}
 	sleep 1
 	echo
 
@@ -162,26 +165,26 @@ function MAINTENACE {
 	# the lock file in /var/cache/apt/archives, including directories.
 	sudo apt clean;
 	echo
-	echo "######################################"
-	echo " Cleaned downloaded temporary packages"
-	echo "######################################"
+	echo -e "${GREEN}######################################"
+	echo -e "${GREEN} Cleaned downloaded temporary packages"
+	echo -e "${GREEN}######################################"${NC}
 	echo
 	sleep 1
 
 	echo
-	echo "#########################################"
-	echo " Checking to see if a reboot is required "
-	echo "#########################################"
+	echo -e "${GREEN}#########################################"
+	echo -e "${GREEN} Checking to see if a reboot is required "
+	echo -e "${GREEN}#########################################"${NC}
 	echo
 	## Check to see if a reboot is required
 	if [ -f /var/run/reboot-required ]; then
  		echo
-  		echo "* * * * * * * * * * * * * * * * * *"
- 		echo "*                                 *"
- 		echo "* Consider rebooting your system  *"
-  		echo "* to finish applying updates      *"
-  		echo "*                                 *"
-  		echo "* * * * * * * * * * * * * * * * * *"
+  		echo -e "${GREEN}* * * * * * * * * * * * * * * * * *"
+ 		echo -e "${GREEN}*                                 *"
+ 		echo -e "${GREEN}* Consider rebooting your system  *"
+  		echo -e "${GREEN}* to finish applying updates      *"
+  		echo -e "${GREEN}*                                 *"
+  		echo -e "${GREEN}* * * * * * * * * * * * * * * * * *"${NC}
   		echo
 	fi
 
@@ -205,12 +208,12 @@ sudo do-release-upgrade
 
 function UPGRADE_TO_NEXT_RELEASE {
 	sleep 1
-	echo "##########################################"
-	echo "vCoreSystem will now check for the        "
-	echo "availabillity of the next version         "
-	echo "and it will start the upgrade             "
-	echo "##########################################"
-	echo ""
+	echo -e "${GREEN}##########################################"
+	echo -e "${GREEN}    vCoreSystem will now check for the"
+	echo -e "${GREEN}    availabillity of the next version"
+	echo -e "${GREEN}    and it will start the upgrade"
+	echo -e "${GREEN}##########################################"${NC}
+	echo
 	sleep 1
 	do-release-upgrade
 	sleep 2
@@ -218,12 +221,12 @@ function UPGRADE_TO_NEXT_RELEASE {
 
 function UPGRADE_TO_DEVEL_RELEASE {
 	sleep 1
-	echo "##########################################"
-	echo "vCoreSystem will now check for the        "
-	echo "availabillity of the next development     "
-	echo "version and it will start the upgrade     "
-	echo "##########################################"
-	echo ""
+	echo -e "${GREEN}##########################################"
+	echo -e "${GREEN}     vCoreSystem will now check for the   "
+	echo -e "${GREEN}   availabillity of the next development  "
+	echo -e "${GREEN}   version and it will start the upgrade  "
+	echo -e "${GREEN}##########################################"${NC}
+	echo -e "${GREEN}"
 	sleep 1
 	do-release-upgrade -d
 	sleep 2
@@ -233,10 +236,9 @@ function SHOW_HELP {
 	cat << EOF
 	
 				vCoreSystem
-				    ~ $UCARE_VERSION ~
-		     All-in-one system update and maintenance app
+		     All-in-one system update and maintenance script
 
-	Usage: sudo vCoreSystem-core <parameter> 
+	Usage: sudo vCoreSystem <parameter> 
 	
 	If no parameter is specified, it will just do the regular
 	maintenance:
@@ -277,18 +279,18 @@ function GOODBYE {
 	sleep 2
 	echo
 	echo
-	echo "#########################"
-	echo "   All Done... GOODBYE"
-	echo "#########################"
+	echo -e "${GREEN}#########################"
+	echo -e "${GREEN}   All Done... GOODBYE"
+	echo -e "${GREEN}#########################"${NC}
 }
 
 function SHUT_DOWN {
 	sleep 1
 	echo
 	echo
-	echo "#########################"
-	echo "      Shutting down"
-	echo "#########################"
+	echo -e "${GREEN}#########################"
+	echo -e "${GREEN}      Shutting down"
+	echo -e "${GREEN}#########################"${NC}
 	sudo shutdown now
 }
 
@@ -296,14 +298,14 @@ function RE_BOOT {
 	sleep 1
 	echo
 	if [ -f /var/run/reboot-required ]; then
-		echo "#########################"
-		echo "      Rebooting"
-		echo "#########################"
+		echo -e "${GREEN}#########################"
+		echo -e "${GREEN}      Rebooting"
+		echo -e "${GREEN}#########################"${NC}
 		sudo reboot
 	else
-		echo "#########################"
-		echo "    No reboot required"
-		echo "#########################"
+		echo -e "${GREEN}#########################"
+		echo -e "${GREEN}    No reboot required"
+		echo -e "${GREEN}#########################"${NC}
 		GOODBYE
 	fi
 	## End of script
