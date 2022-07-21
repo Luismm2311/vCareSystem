@@ -12,3 +12,4 @@ mv vCareSystem /usr/bin/vCareSystem
 echo "vCareSystem installed"
 echo "Run vCareSystem with sudo vCareSystem"
 nala install deborphan -y
+vCareSystem
