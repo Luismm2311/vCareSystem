@@ -4,11 +4,11 @@ set -e
 #
 #
 #_______________________________________________
-#THIS IS THE Terminal Version of uCareSystem
+#THIS IS THE Terminal Version of vCoreSystem
 #_______________________________________________
-# Name   : uCareSystem Core
+# Name   : vCoreSystem
 # Licence: GPL3 (http://www.gnu.org/licenses/gpl.html)
-# Author : Salih Emin
+# Author : Luismm2311
 # WebSite: http://utappia.org
 # Email  : salih-(at)-utappia.org
 # Date   : 05-03-2020 (first release 19-02-2009)
@@ -30,7 +30,7 @@ UCARE_VERSION=(20.03.0)
 if [[ $EUID -ne 0 ]] ; then
     clear
     echo ""
-    echo "uCareSystem Core must be run as root or with sudo. Now I will just exit..." 1>&2
+    echo "vCoreSystem must be run as root or with sudo. Now I will just exit..." 1>&2
     echo ""
     sleep 2
     exit 1
@@ -54,30 +54,24 @@ fi
 function WELCOME_SCREEN {
 	echo "_______________________________________________________"
 	echo "                                                       "
-	echo "            uCareSystem Core $UCARE_VERSION            "
+	echo "                  vCoreSystem                          "
 	echo "            ~~~~~~~~~~~~~~~~~~~~~                      "
 	echo "                                                       "
 	echo " Welcome to all-in-one System Update and maintenance   "
-	echo " assistant app.                                        "
+	echo " assistant script.                                     "
 	echo "                                                       "
 	echo "                                                       "
 	echo " This simple script will automatically         	     "
-	echo " refresh your packagelist, download and                "
+	echo " Checks for the fastest mirros,refresh                 "
+	echo " your packagelist, download and                        "
 	echo " install updates (if there are any), remove any old    "
 	echo " kernels, obsolete packages and configuration files    "
 	echo " to free up disk space, without any need of user       "
 	echo " interference                                          "
-	echo "                   				                     "
-	echo " If you’ve found it useful and saved you time and you  "
-	echo " think it is worth of your support, you can make a     "
-	echo " donation via PayPal by clicking on the following:     "
-	echo "                                                       "
-	echo "           https://www.paypal.me/cerebrux              "
 	echo "_______________________________________________________"
 	echo
-	echo " uCareSystem Core will start in 5 seconds... "
-
-	sleep 6
+	echo " vCoreSystem will start in 5 seconds... "
+	sleep 5
 }
 
 function MAINTENACE {
@@ -212,7 +206,7 @@ sudo do-release-upgrade
 function UPGRADE_TO_NEXT_RELEASE {
 	sleep 1
 	echo "##########################################"
-	echo "uCareSystem will now check for the        "
+	echo "vCoreSystem will now check for the        "
 	echo "availabillity of the next version         "
 	echo "and it will start the upgrade             "
 	echo "##########################################"
@@ -225,7 +219,7 @@ function UPGRADE_TO_NEXT_RELEASE {
 function UPGRADE_TO_DEVEL_RELEASE {
 	sleep 1
 	echo "##########################################"
-	echo "uCareSystem will now check for the        "
+	echo "vCoreSystem will now check for the        "
 	echo "availabillity of the next development     "
 	echo "version and it will start the upgrade     "
 	echo "##########################################"
@@ -238,26 +232,24 @@ function UPGRADE_TO_DEVEL_RELEASE {
 function SHOW_HELP {
 	cat << EOF
 	
-				uCareSystem Core
+				vCoreSystem
 				    ~ $UCARE_VERSION ~
 		     All-in-one system update and maintenance app
 
-	Usage: sudo ucaresystem-core <parameter> 
+	Usage: sudo vCoreSystem-core <parameter> 
 	
 	If no parameter is specified, it will just do the regular
 	maintenance:
-	
-	 * Updates the list of available packages
-	 * Downloads and installs the available updates
-	 * Checks if there are older Linux kernels on the system and removes
-	   them. However it keeps the current and one previous version of 
-	   the kernel.
-	 * Cleans the cache of the downloaded packages
-	 * Removes obsolete packages
-	 * Removes orphan packets
-	 * Deletes package configuration files from packages that have been
-	   uninstalled by you.
-	
+
+		* Checks for the fastest mirros
+		* Updates the list of available packages
+		* Downloads and installs the available updates
+		* Checks if there are older Linux kernels on the system and removes them. However it keeps the current and one previous version of the kernel.
+		* Cleans the cache of the downloaded packages
+		* Removes obsolete packages
+		* Removes orphan packets
+		* Deletes package configuration files from packages that have been uninstalled by you.
+	 
 	Parameter:	 
 		 -h          display this help and exit
 		 
@@ -275,9 +267,8 @@ function SHOW_HELP {
 			     reached their EOL and the user wants to upgrade
 			     it to the next supported version.
 		 
-		 -r          After completing all the tasks, reboot the system
-		 
-		 -s	         After completing all the tasks, shutdown the system
+		 -r          After completing all the tasks, reboot the system if needed.		 
+		 -s	         After completing all the tasks, shutdown the system.
 
 EOF
 }
@@ -287,7 +278,7 @@ function GOODBYE {
 	echo
 	echo
 	echo "#########################"
-	echo "     All Done... GOODBYE"
+	echo "   All Done... GOODBYE"
 	echo "#########################"
 }
 
@@ -304,11 +295,17 @@ function SHUT_DOWN {
 function RE_BOOT {
 	sleep 1
 	echo
-	echo
-	echo "#########################"
-	echo "        Rebooting"
-	echo "#########################"
-	sudo reboot
+	if [ -f /var/run/reboot-required ]; then
+		echo "#########################"
+		echo "      Rebooting"
+		echo "#########################"
+		sudo reboot
+	else
+		echo "#########################"
+		echo "    No reboot required"
+		echo "#########################"
+		GOODBYE
+	fi
 	## End of script
 }
 

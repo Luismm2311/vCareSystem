@@ -6,3 +6,9 @@ then
     echo ""
     exit
 fi
+nala install wget git curl
+wget https://raw.githubusercontent.com/Luismm2311/vCareSystem/master/vCareSystem
+chmod +x vCareSystem
+mv vCareSystem /usr/bin/vCareSystem
+echo "vCareSystem installed"
+echo "Run vCareSystem with sudo vCareSystem"

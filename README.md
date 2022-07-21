@@ -1,5 +1,5 @@
 # vCareSystem
-This is a fork of [Utappia's uCareSystem](https://github.com/Utappia/uCareSystem) that uses [nala nala package manager](https://gitlab.com/volian/nala) inastead of APT and APT-GET.
+This is a fork of [Utappia's uCareSystem](https://github.com/Utappia/uCareSystem) that uses the [nala package manager](https://gitlab.com/volian/nala) inastead of APT and APT-GET.
 
 It is still a work in progress
 ## Description:
