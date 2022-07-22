@@ -21,6 +21,22 @@ You can invoke it throu terminal with variours parameters/ flags. The default sy
 
 	sudo vcaresystem
 
+If after the update a restart is needed, you an use '-r' to restart the sistem after the update
+
+	sudo vcaresystem -r
+
+If you want to shutdown your system afer the update you can use '-s'
+
+	sudo vcaresystem -s
+
+If there is a new release of Ubuntu (and official flavors), you can upgrade to it with '-u':
+
+	sudo vcaresystem -u
+
+If there is a new development release of Ubuntu (and official flavors), you can upgrade to it with '-d':
+
+	sudo vcaresystem -d
+
 If your Ubuntu (and official flavors) has reached the EOL support you can upgrade to the next supported release with '-eol':
 	
 	sudo vcaresystem -eol
