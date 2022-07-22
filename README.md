@@ -48,7 +48,7 @@ For information about all the availabe parameters / flags, start ucaresystem-cor
 
 ## Installation
 
-First ypu need to install [nala](https://gitlab.com/volian/nala#installation)
+First you need to install [nala](https://gitlab.com/volian/nala#installation)
 
 ```bash
 echo "deb http://deb.volian.org/volian/ scar main" | sudo tee /etc/apt/sources.list.d/volian-archive-scar-unstable.list
