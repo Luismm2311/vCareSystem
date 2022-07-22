@@ -45,10 +45,6 @@ For information about all the availabe parameters / flags, start ucaresystem-cor
 
 	sudo vcaresystem -h
 
-## Appendix
-
-Any additional information goes here
-
 
 ## Installation
 
