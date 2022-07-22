@@ -7,15 +7,14 @@ NC='\e[0m'
 #
 #
 #_______________________________________________
-#THIS IS THE Terminal Version of vCoreSystem
+#THIS IS THE Terminal Version of vCareSystem
 #_______________________________________________
-# Name   : vCoreSystem
+# Name   : vCareSystem
 # Licence: GPL3 (http://www.gnu.org/licenses/gpl.html)
 # Author : Luismm2311
-# WebSite: http://utappia.org
-# Email  : salih-(at)-utappia.org
-# Date   : 05-03-2020 (first release 19-02-2009)
-# Version: 20.03.0
+# Email  : luismm2311@luismm2311.com
+# Date   : 21-07-2022 (first release)
+# Version: 1.0
 # System : Ubuntu Linux and derivatives. Partial support for Debian
 # Description:
 #This simple script will automatically refresh your package list, download and install
@@ -27,37 +26,37 @@ NC='\e[0m'
 #Variables
 DIST_CODENAME=$(lsb_release --codename | cut -f2)
 DATE=(date +%F_%T)
-UCARE_VERSION=(20.03.0)
+UCARE_VERSION=(1.0)
 
 # Checking if the user has run the script with "sudo" or not
 if [[ $EUID -ne 0 ]] ; then
     clear
     echo
-    echo -e "${RED}vCoreSystem must be run as root or with sudo. Now I will just exit..." ${NC}
+    echo -e "${RED}vCareSystem must be run as root or with sudo. Now I will just exit..." ${NC}
     echo
     sleep 2
     exit 1
 fi
-REQUIRED_PKG="nala"
-PKG_OK=$(dpkg-query -W --showformat='${Status}\n' $REQUIRED_PKG|grep "install ok installed")
-echo Checking for $REQUIRED_PKG: $PKG_OK
-if [ "" = "$PKG_OK" ]; then
-  echo -e "${RED}Please install nala:" ${NC}
-  echo "https://gitlab.com/volian/nala#installation"
-  sleep 5
-  exit 1
-fi
-REQUIRED_PKG="deborphan"
-PKG_OK=$(dpkg-query -W --showformat='${Status}\n' $REQUIRED_PKG|grep "install ok installed")
-echo Checking for $REQUIRED_PKG: $PKG_OK
-if [ "" = "$PKG_OK" ]; then
-  echo "No $REQUIRED_PKG. Setting up $REQUIRED_PKG."
-  sudo nala install $REQUIRED_PKG -y
-fi
+#REQUIRED_PKG="nala"
+#PKG_OK=$(dpkg-query -W --showformat='${Status}\n' $REQUIRED_PKG|grep "install ok installed")
+#echo Checking for $REQUIRED_PKG: $PKG_OK
+#if [ "" = "$PKG_OK" ]; then
+#  echo -e "${RED}Please install nala:" ${NC}
+#  echo "https://gitlab.com/volian/nala#installation"
+#  sleep 5
+#  exit 1
+#fi
+#REQUIRED_PKG="deborphan"
+#PKG_OK=$(dpkg-query -W --showformat='${Status}\n' $REQUIRED_PKG|grep "install ok installed")
+#echo Checking for $REQUIRED_PKG: $PKG_OK
+#if [ "" = "$PKG_OK" ]; then
+#  echo "No $REQUIRED_PKG. Setting up $REQUIRED_PKG."
+#  sudo nala install $REQUIRED_PKG -y
+#fi
 function WELCOME_SCREEN {
 	echo -e "${GREEN}_______________________________________________________"
 	echo -e "${GREEN}                                                       "
-	echo -e "${GREEN}                  vCoreSystem                          "
+	echo -e "${GREEN}                  vCareSystem                          "
 	echo -e "${GREEN}            ~~~~~~~~~~~~~~~~~~~~~                      "
 	echo -e "${GREEN}                                                       "
 	echo -e "${GREEN} Welcome to all-in-one System Update and maintenance   "
@@ -73,7 +72,7 @@ function WELCOME_SCREEN {
 	echo -e "${GREEN} interference                                          "
 	echo -e "${GREEN}_______________________________________________________"
 	echo
-	echo -e "${GREEN} vCoreSystem will start in 5 seconds... "${NC}
+	echo -e "${GREEN} vCareSystem will start in 5 seconds... "${NC}
 	sleep 5
 }
 
@@ -209,7 +208,7 @@ sudo do-release-upgrade
 function UPGRADE_TO_NEXT_RELEASE {
 	sleep 1
 	echo -e "${GREEN}##########################################"
-	echo -e "${GREEN}    vCoreSystem will now check for the"
+	echo -e "${GREEN}    vCareSystem will now check for the"
 	echo -e "${GREEN}    availabillity of the next version"
 	echo -e "${GREEN}    and it will start the upgrade"
 	echo -e "${GREEN}##########################################"${NC}
@@ -222,7 +221,7 @@ function UPGRADE_TO_NEXT_RELEASE {
 function UPGRADE_TO_DEVEL_RELEASE {
 	sleep 1
 	echo -e "${GREEN}##########################################"
-	echo -e "${GREEN}     vCoreSystem will now check for the   "
+	echo -e "${GREEN}     vCareSystem will now check for the   "
 	echo -e "${GREEN}   availabillity of the next development  "
 	echo -e "${GREEN}   version and it will start the upgrade  "
 	echo -e "${GREEN}##########################################"${NC}
@@ -235,10 +234,10 @@ function UPGRADE_TO_DEVEL_RELEASE {
 function SHOW_HELP {
 	cat << EOF
 	
-				vCoreSystem
+				vCareSystem
 		     All-in-one system update and maintenance script
 
-	Usage: sudo vCoreSystem <parameter> 
+	Usage: sudo vCareSystem <parameter> 
 	
 	If no parameter is specified, it will just do the regular
 	maintenance:
