@@ -94,6 +94,8 @@ function MAINTENACE {
 	echo
 	## Updates packages and libraries
 	sudo nala upgrade --purge -y;
+	sudo snap refresh;
+	sudo flatpak update -y
 	echo
 	echo -e "${GREEN}###############################################"
 	echo -e "${GREEN}Finished updating packages, system libraries,"
