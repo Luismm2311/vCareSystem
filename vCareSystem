@@ -75,12 +75,11 @@ function WELCOME_SCREEN {
 	echo -e "${GREEN} vCareSystem will start in 5 seconds... "${NC}
 	sleep 5
 }
-
-function MAINTENACE {
+function FETCH {
 	echo
 	echo
 	echo -e "${GREEN}#########################"
-	echo -e "${GREEN}          Starting"
+	echo -e "${GREEN}          Searching..."
 	echo -e "${GREEN}#########################" ${NC}
 	echo
 	echo
@@ -92,6 +91,13 @@ function MAINTENACE {
 	echo -e "${GREEN}##########################"${NC}
 	echo
 	echo
+}
+function MAINTENACE {
+	echo
+	echo
+	echo -e "${GREEN}#########################"
+	echo -e "${GREEN}          Starting"
+	echo -e "${GREEN}#########################" ${NC}
 	## Updates packages and libraries
 	sudo nala upgrade --purge -y;
 	sudo snap refresh;
@@ -272,7 +278,8 @@ function SHOW_HELP {
 			     it to the next supported version.
 		 
 		 -r          After completing all the tasks, reboot the system if needed.		 
-		 -s	         After completing all the tasks, shutdown the system.
+		 -s	     After completing all the tasks, shutdown the system.
+		 -f	     Search for the best servers
 
 EOF
 }
@@ -332,6 +339,9 @@ while [ "$1" != "" ]; do
 							 exit
 							    ;;
 	-r | --reboot )		 WELCOME_SCREEN && MAINTENACE && GOODBYE && RE_BOOT
+							 exit
+							    ;;
+	-f | --fetch ) 		WELCOME_SCREEN && FETCH && MAINTENACE && GOODBYE
 							 exit
 							    ;;
         * )                  SHOW_HELP
