@@ -8,7 +8,7 @@ then
 fi
 wget https://raw.githubusercontent.com/Luismm2311/vCareSystem/master/vCareSystem
 chmod +x vCareSystem
-mv vCareSystem /usr/bin/vCareSystem
+mv -f vCareSystem /usr/bin/vCareSystem
 echo "vCareSystem installed"
 echo "Run vCareSystem with sudo vCareSystem"
 sudo nala install deborphan -y
