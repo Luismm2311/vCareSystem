@@ -19,31 +19,33 @@ In summary, vCareSystem automatically performs the following maintenance process
 
 You can invoke it throu terminal with variours parameters/ flags. The default system updates and maintenace for Ubuntu / debian / Linux Mint (and derivatives) :
 
-	sudo vcaresystem
+	sudo vCareSystem
 
-If after the update a restart is needed, you an use '-r' to restart the sistem after the update
+If after the update a restart is needed, you can use '-r' to restart the sistem after the update
 
-	sudo vcaresystem -r
+	sudo vCareSystem -r
 
 If you want to shutdown your system afer the update you can use '-s'
 
-	sudo vcaresystem -s
-
+	sudo vCareSystem -s
+If you wnat to search for the best APT servers, you can use '-f'
+	
+	sudo vCareSystem -f
 If there is a new release of Ubuntu (and official flavors), you can upgrade to it with '-u':
 
-	sudo vcaresystem -u
+	sudo vCareSystem -u
 
 If there is a new development release of Ubuntu (and official flavors), you can upgrade to it with '-d':
 
-	sudo vcaresystem -d
+	sudo vCareSystem -d
 
 If your Ubuntu (and official flavors) has reached the EOL support you can upgrade to the next supported release with '-eol':
 	
-	sudo vcaresystem -eol
+	sudo vCareSystem -eol
 
 For information about all the availabe parameters / flags, start ucaresystem-core with '-h' parameter :
 
-	sudo vcaresystem -h
+	sudo vCareSystem -h
 
 
 ## Installation
