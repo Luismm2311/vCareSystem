@@ -152,7 +152,7 @@ function MAINTENACE {
 		echo "No kernels are eligible for removal"
 	fi
 
-	sudo apt $APT_OPTS remove $PURGE;
+	sudo apt $APT_OPTS remove -y $PURGE;
 
 	echo
 	echo -e "${GREEN}###################################"
