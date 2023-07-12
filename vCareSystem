@@ -72,8 +72,11 @@ function WELCOME_SCREEN {
 	echo -e "${GREEN} interference                                          "
 	echo -e "${GREEN}_______________________________________________________"
 	echo
-	echo -e "${GREEN} vCareSystem will start in 5 seconds... "${NC}
-	sleep 5
+	for (( i=5; i>0; i--)); do
+  		echo -ne "${GREEN}vCareSystem will start in $i seconds...${NC}\033[0K\r" 
+  		sleep 1
+	done
+	echo
 }
 function FETCH {
 	echo
