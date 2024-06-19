@@ -50,21 +50,26 @@ For information about all the availabe parameters / flags, start ucaresystem-cor
 
 ## Installation
 
-First you need to install [nala](https://gitlab.com/volian/nala#installation)
+First you need to install [nala](https://gitlab.com/volian/nala/-/wikis/Installation)
+For Ubuntu 24.04 and Debina 12 or newer:
+```bash
+sudo apt install nala
+```
+For Ubuntu 20.04, 22.04 and Debian 11:
+```bash
+curl https://gitlab.com/volian/volian-archive/-/raw/main/install-nala.sh | bash
+```
+If the script fails:
+```bash
+sudo apt install -t nala nala
+```
+For older distributions like Ubuntu 18.4, Debian 10 and older:
 
-```bash
-echo "deb http://deb.volian.org/volian/ scar main" | sudo tee /etc/apt/sources.list.d/volian-archive-scar-unstable.list
-wget -qO - https://deb.volian.org/volian/scar.key | sudo tee /etc/apt/trusted.gpg.d/volian-archive-scar-unstable.gpg > /dev/null
-sudo apt update
-```
-For Ubuntu 22.04, Debian Sid and newer.
-```bash
-sudo apt install nala -y
-```
-For older distributions like Ubuntu 21.04, Debian Stable and older.
-```
-sudo apt install nala-legacy -y
-```
-Now run:
+Unfortunately Nala will not work on these releases or older.
+The python versions are too old, and they don't have the required packages.
+
+
+After nala is installed, now run:
+
 ```
 curl -s https://raw.githubusercontent.com/Luismm2311/vCareSystem/master/install.sh | sudo bash
